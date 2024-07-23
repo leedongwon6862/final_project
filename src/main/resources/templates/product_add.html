@@ -5,11 +5,13 @@
     <title>상품 추가</title>
 </head>
 <body>
-
-<form action="/product/add" method="post">
+<p4>상품 추가</p4>
+<form action="/product/add" method="post" enctype="multipart/form-data" >
+<!--    멀티파트 파일로 받으려면  nctype="multipart/form-data" 이건 파일 하나만 할 수있다.-->
     <input type="text" name="title" placeholder="이름">
     <input type="text" name="price"  placeholder="가격">
     <input type="text" name="description" placeholder="설명">
+    <input type="file" name="file">
     <input type="submit" value="추가">
 </form>
 

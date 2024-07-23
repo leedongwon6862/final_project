@@ -5,6 +5,7 @@
     <title>상품 삭제</title>
 </head>
 <body>
+<p4>상품 삭제</p4>
 <form th:action="@{|/product/delete/${id}|}" method="post">
     <div th:text="${product.title}"></div>
     <div th:text="${product.price}"></div>

@@ -23,4 +23,6 @@ public class Product {
     private Integer price;
 
     private String description;
+
+    private String url;
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,8 +36,8 @@ public class ProductController {
 
     //상품 추가 기능
     @PostMapping("/add")
-    public String addProduct(String title, Integer price, String description) {
-        productService.addProduct(title, price, description);
+    public String addProduct(String title, Integer price, String description, MultipartFile file) {
+        productService.addProduct(title, price, description,file);
         return "redirect:/product/list";
     }
 
