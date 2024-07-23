@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 상세</title>
+</head>
+<body>
+<div th:each="detail : ${showProduct}">
+    <div th:text="${detail.title}"></div>
+    <div th:text="${detail.price}"></div>
+    <div th:text="${detail.description}"></div>
+</div>
+
+<a th:href="@{|/product/delete/${id}|}">삭제</a>
+
+</body>
+
+</html>

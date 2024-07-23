@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 삭제</title>
+</head>
+<body>
+<form th:action="@{|/product/delete/${id}|}" method="post">
+    <div th:text="${product.title}"></div>
+    <div th:text="${product.price}"></div>
+    <div th:text="${product.description}"></div>
+    <input type="submit" value="삭제">
+</form>
+
+</body>
+</html>

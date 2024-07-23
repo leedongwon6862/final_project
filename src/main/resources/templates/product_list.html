@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 리스트</title>
+</head>
+<body>
+
+<div th:each="productList : ${products}">
+    <a th:href="@{|/product/detail/${productList.id}|}">
+    <div th:text="${productList.title}"></div>
+    </a>
+    <div th:text="${productList.price}+' 원'"></div>
+</div>
+
+
+</body>
+</html>
