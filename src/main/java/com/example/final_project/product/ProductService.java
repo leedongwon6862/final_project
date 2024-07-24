@@ -1,5 +1,8 @@
-package com.example.final_project;
+package com.example.final_project.product;
 
+import com.example.final_project.category.Category;
+import com.example.final_project.category.CategoryRepository;
+import com.example.final_project.category.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
@@ -17,15 +20,19 @@ import java.util.UUID;
 public class ProductService {
     private final ResourceLoader resourceLoader;
      private final ProductRepository productRepository;
+     private final CategoryService categoryService;
     public List<Product> getProducts() {
         return  productRepository.findAll();
     }
 
-    public Product addProduct(String title, Integer price, String description, MultipartFile file) {
+    public Product addProduct(String title, Integer price, String description, MultipartFile file ,Long categoryId) {
         Product product = new Product();
         product.setTitle(title);
         product.setPrice(price);
         product.setDescription(description);
+        Optional<Category> category = categoryService.getCategoryById(categoryId);
+        product.setCategory(category.get());
+
 
         if (!file.isEmpty())  //내가 파일 업로드 한 경우
             try {
@@ -56,5 +63,15 @@ public class ProductService {
 
     public void deleteProduct(Long id) {
          productRepository.deleteById(id);
+    }
+
+    public void updateProduct(Long id, String description, String title, Integer price, String url) {
+        Product newProduct = showProduct(id).get();
+        newProduct.setDescription(description);
+        newProduct.setTitle(title);
+        newProduct.setUrl(url);
+        newProduct.setTitle(title);
+        newProduct.setPrice(price);
+        productRepository.save(newProduct);
     }
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>상품 리스트</title>
+</head>
+<body class="bg-gray-100 flex flex-col items-center">
+
+<p class="text-2xl font-bold mt-8 mb-8">30cm</p>
+
+<div class="flex flex-row gap-4" >
+<div th:each="categoryList : ${categories} " >
+    <span th:text="${categoryList.title}" ></span>
+</div>
+</div>
+
+
+<!-- 그리드 컨테이너를 가운데 정렬 -->
+<div class="grid grid-cols-4 gap-4 max-w-7xl w-full">
+
+    <!-- 기본 템플릿 안에 삽입될 내용 Start -->
+<th:block layout:fragment="content"></th:block>
+    <!-- 기본 템플릿 안에 삽입될 내용 End -->
+
+</div>
+
+<a href="/product/add" class="mt-8 text-blue-500 hover:underline text-2xl mb-8">추가</a>
+</body>
+
+</html>

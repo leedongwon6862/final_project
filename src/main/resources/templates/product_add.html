@@ -12,6 +12,10 @@
     <input type="text" name="price"  placeholder="가격">
     <input type="text" name="description" placeholder="설명">
     <input type="file" name="file">
+    <label for="category">Category:</label>
+    <select id="category" name="categoryId">
+        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.title}"></option>
+    </select><br><br>
     <input type="submit" value="추가">
 </form>
 

@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>상품 리스트</title>
-</head>
-<body class="bg-gray-100 flex flex-col items-center">
 
-<p class="text-2xl font-bold mt-8 mb-8">30cm</p>
 
-<!-- 그리드 컨테이너를 가운데 정렬 -->
-<div class="grid grid-cols-4 gap-4 max-w-7xl w-full">
+
+
 
     <!-- 각 상품을 나열 -->
-    <div th:each="productList : ${products}" class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
+<html layout:decorate="~{layout}">
+    <div layout:fragment="content" th:each="productList : ${products}" class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
         <a th:href="@{|/product/detail/${productList.id}|}" class="mb-2">
             <div th:text="${productList.title}" class="text-lg font-semibold hover:bg-blue-300"></div>
         </a>
@@ -23,9 +14,10 @@
             <img th:src="${productList.url}" alt="이미지없음" class="w-full h-auto object-cover rounded-md">
         </div>
     </div>
-</div>
 
-<a href="/product/add" class="mt-8 text-blue-500 hover:underline text-2xl mb-8">추가</a>
 
-</body>
+
+
+
+
 </html>

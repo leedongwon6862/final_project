@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{|/product/update/${id}|}" method="post">
+    <input type="text" name="title" th:value="${product.title}">
+    <input type="text" name="id" th:value="${product.id}">
+    <input type="text" name="price" th:value="${product.price}">
+    <input type="text" name="description" th:value="${product.description}">
+    <input type="file" name="file" >
+    <input type="submit" value="수정">
+</form>
+</body>
+</html>
