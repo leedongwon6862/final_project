@@ -5,6 +5,9 @@ import com.example.final_project.category.CategoryRepository;
 import com.example.final_project.category.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +24,10 @@ public class ProductService {
     private final ResourceLoader resourceLoader;
      private final ProductRepository productRepository;
      private final CategoryService categoryService;
-    public List<Product> getProducts() {
+
+
+
+    public List<Product> getProducts( ) {
         return  productRepository.findAll();
     }
 
@@ -73,5 +79,17 @@ public class ProductService {
         newProduct.setTitle(title);
         newProduct.setPrice(price);
         productRepository.save(newProduct);
+    }
+
+
+
+    public List<Product> findByCategoryId(Long categoryId) {
+        return productRepository.findByCategoryId(categoryId);
+    }
+
+
+    public List<Product> findByTitleContaining(String searchTitle) {
+
+        return productRepository.findByTitleContaining(searchTitle);
     }
 }

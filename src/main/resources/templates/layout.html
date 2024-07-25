@@ -9,11 +9,24 @@
 <body class="bg-gray-100 flex flex-col items-center">
 
 <p class="text-2xl font-bold mt-8 mb-8">30cm</p>
+<div>
+    <form action="/product/list">
+        <input type="text" name="searchTitle">
+        <input type="submit" value="검색" class="btn">
+    </form>
+</div>
 
 <div class="flex flex-row gap-4" >
-<div th:each="categoryList : ${categories} " >
-    <span th:text="${categoryList.title}" ></span>
-</div>
+
+
+    <div th:each="categoryList : ${categories} " >
+        <a th:href="@{|/product/list?categoryId=${categoryList.id}|}" >
+            <span th:text="${categoryList.title}" ></span>
+        </a>
+    </div>
+
+
+
 </div>
 
 
