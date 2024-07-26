@@ -20,11 +20,10 @@ import java.util.Optional;
 public class ProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
-    private final ProductRepository productRepository;
 
     //상품 리스트
     @GetMapping("/list")
-    public String getProducts(Model model, @RequestParam(defaultValue = "0") Long categoryId,
+    public String getProducts(Model model, @RequestParam(defaultValue = "0") Long categoryId, // 파라 미터 에 아이디 없을때 기본값 0
                               @RequestParam(defaultValue = "") String searchTitle,
                               @RequestParam(value="page",defaultValue = "0") int page) {
 
@@ -46,7 +45,6 @@ public class ProductController {
         List<Category> categories = categoryService.getCategoryList();
 
         // 모델에 데이터 추가
-
         model.addAttribute("categories", categories);
 
         return "product_list";
@@ -71,7 +69,7 @@ public class ProductController {
 
     //상품 상세 보기
     @GetMapping("/detail/{id}")
-    public String showProduct(@PathVariable("id") Long id, Model model) {
+    public String showProduct(@PathVariable("id") Long id, Model model ) {
         Optional<Product> showProduct = productService.showProduct(id);
         if (showProduct.isPresent()) {
             model.addAttribute("showProduct", showProduct.get());

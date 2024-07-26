@@ -72,7 +72,7 @@ public class ProductService {
          productRepository.deleteById(id);
     }
 
-    public void updateProduct(Long id, String description, String title, Integer price, String url) {
+    public void updateProduct(Long id, String description, String title, Integer price, String url ) {
         Product newProduct = showProduct(id).get();
         newProduct.setDescription(description);
         newProduct.setTitle(title);

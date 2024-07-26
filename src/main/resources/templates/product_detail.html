@@ -1,19 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>상품 상세</title>
-</head>
-<body>
-<p4>상품 상세 보기</p4>
-<div th:each="detail : ${showProduct}">
-    <div th:text="${detail.title}"></div>
-    <div th:text="${detail.price}"></div>
-    <div th:text="${detail.description}"></div>
+<html layout:decorate="~{layout}">
+
+
+<div layout:fragment="content" class="h-screen">
+    <div class="w-[800px] h-[800px] flex flex-col items-center justify-center">
+        <p4 class="text-2xl"><상품 상세 보기></p4>
+        <img class="w-[600px] h-[500px]" th:src="@{|${showProduct.url}|}" alt="이미지 없음">
+        <div th:text="'제품이름:'+ ${showProduct.title}"></div>
+        <div th:text="'제품가격: '+ ${showProduct.price}+'원' "></div>
+        <div th:text=" '제품설명: '+${showProduct.description}"></div>
+    </div>
+
+    <a th:href="@{|/product/delete/${id}|}" class="btn">삭제</a>
 </div>
 
-<a th:href="@{|/product/delete/${id}|}">삭제</a>
-
-</body>
 
 </html>

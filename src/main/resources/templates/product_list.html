@@ -2,18 +2,38 @@
 <html layout:decorate="~{layout}">
 
 
-<div layout:fragment="content" th:each="productList : ${products}"
-     class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
+<div layout:fragment="content">
 
-    <a th:href="@{|/product/detail/${productList.id}|}" class="mb-2">
-        <div th:text="${productList.title}" class="text-lg font-semibold hover:bg-blue-300"></div>
-    </a>
-    <div th:text="${productList.price}+' 원'" class="text-sm text-gray-600 mb-2"></div>
     <div>
-        <img th:src="${productList.url}" alt="이미지없음" class="w-full h-auto object-cover rounded-md">
+        <form action="/product/list">
+            <input type="text" name="searchTitle">
+            <input type="submit" value="검색" class="btn">
+        </form>
     </div>
+    <div  class="grid grid-cols-4 gap-4 max-w-7xl w-full">
 
+
+        <div th:each="productList : ${products}"
+             class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
+
+            <a th:href="@{|/product/detail/${productList.id}|}" class="mb-2">
+                <div th:text="${productList.title}" class="text-lg font-semibold hover:bg-blue-300"></div>
+            </a>
+            <div th:text="${productList.price}+' 원'" class="text-sm text-gray-600 mb-2"></div>
+            <div>
+                <img th:src="${productList.url}" alt="이미지없음" class="w-full h-auto object-cover rounded-md">
+            </div>
+
+
+        </div>
+    </div>
+    <div class="flex justify-center gap-5">
+        <a href="/product/add" class="mt-8 text-blue-500 hover:underline text-2xl mb-8">추가</a>
+        <a th:if="${products.hasPrevious}" th:href="@{|/product/list?page=${products.number-1}|}">이전</a>
+        <a th:if="${products.hasNext}" th:href="@{|/product/list?page=${products.number+1}|}">다음</a>
+    </div>
 </div>
+
 
 
 </html>

@@ -14,16 +14,16 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; //상품 아이디
 
-    private String title;
+    private String title; // 상품 이름
 
-    private Integer price;
+    private Integer price; // 상품 가격
 
-    private String description;
+    private String description; // 상품 설명
 
-    private String url;
+    private String url; // 상품 이미지
 
-    @ManyToOne
+    @ManyToOne   //카테고리 연결
     private Category category;
 }
