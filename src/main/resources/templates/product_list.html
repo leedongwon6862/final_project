@@ -1,27 +1,19 @@
-
-
-
-
-
-
-    <!-- 각 상품을 나열 -->
+<!-- 각 상품을 나열 -->
 <html layout:decorate="~{layout}">
 
 
+<div layout:fragment="content" th:each="productList : ${products}"
+     class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
 
-
-    <div layout:fragment="content" th:each="productList : ${products}" class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-        <a th:href="@{|/product/detail/${productList.id}|}" class="mb-2">
-            <div th:text="${productList.title}" class="text-lg font-semibold hover:bg-blue-300"></div>
-        </a>
-        <div th:text="${productList.price}+' 원'" class="text-sm text-gray-600 mb-2"></div>
-        <div>
-            <img th:src="${productList.url}" alt="이미지없음" class="w-full h-auto object-cover rounded-md">
-        </div>
+    <a th:href="@{|/product/detail/${productList.id}|}" class="mb-2">
+        <div th:text="${productList.title}" class="text-lg font-semibold hover:bg-blue-300"></div>
+    </a>
+    <div th:text="${productList.price}+' 원'" class="text-sm text-gray-600 mb-2"></div>
+    <div>
+        <img th:src="${productList.url}" alt="이미지없음" class="w-full h-auto object-cover rounded-md">
     </div>
 
-
-
+</div>
 
 
 </html>

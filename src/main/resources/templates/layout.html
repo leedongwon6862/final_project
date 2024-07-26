@@ -2,13 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <title>상품 리스트</title>
 </head>
+
+
 <body class="bg-gray-100 flex flex-col items-center">
 
 <p class="text-2xl font-bold mt-8 mb-8">30cm</p>
+
+<div class="w-full flex justify-end p-4">
+    <a href="/user/signup" class="text-blue-500 hover:underline">회원가입</a>
+    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+</div>
 <div>
     <form action="/product/list">
         <input type="text" name="searchTitle">
@@ -16,15 +24,14 @@
     </form>
 </div>
 
-<div class="flex flex-row gap-4" >
+<div class="flex flex-row gap-4">
 
 
-    <div th:each="categoryList : ${categories} " >
-        <a th:href="@{|/product/list?categoryId=${categoryList.id}|}" >
-            <span th:text="${categoryList.title}" ></span>
+    <div th:each="categoryList : ${categories} ">
+        <a th:href="@{|/product/list?categoryId=${categoryList.id}|}">
+            <span th:text="${categoryList.title}"></span>
         </a>
     </div>
-
 
 
 </div>
@@ -34,12 +41,17 @@
 <div class="grid grid-cols-4 gap-4 max-w-7xl w-full">
 
     <!-- 기본 템플릿 안에 삽입될 내용 Start -->
-<th:block layout:fragment="content"></th:block>
+    <th:block layout:fragment="content"></th:block>
     <!-- 기본 템플릿 안에 삽입될 내용 End -->
 
 </div>
+<div class="flex gap-5">
+    <a href="/product/add" class="mt-8 text-blue-500 hover:underline text-2xl mb-8">추가</a>
 
-<a href="/product/add" class="mt-8 text-blue-500 hover:underline text-2xl mb-8">추가</a>
+    <a th:if="${products.hasPrevious}" th:href="@{|/product/list?page=${products.number-1}|}">이전</a>
+    <a th:if="${products.hasNext}" th:href="@{|/product/list?page=${products.number+1}|}">다음</a>
+
+</div>
 </body>
 
 </html>

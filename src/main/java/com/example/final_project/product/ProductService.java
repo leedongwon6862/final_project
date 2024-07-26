@@ -27,8 +27,9 @@ public class ProductService {
 
 
 
-    public List<Product> getProducts( ) {
-        return  productRepository.findAll();
+    public Page<Product> getProducts(int page) {
+        Pageable pageable = PageRequest.of(page ,12);
+        return  productRepository.findAll(pageable);
     }
 
     public Product addProduct(String title, Integer price, String description, MultipartFile file ,Long categoryId) {
@@ -83,13 +84,14 @@ public class ProductService {
 
 
 
-    public List<Product> findByCategoryId(Long categoryId) {
-        return productRepository.findByCategoryId(categoryId);
+    public Page<Product> findByCategoryId(Long categoryId,int page) {
+        Pageable pageable = PageRequest.of(page,12);
+        return productRepository.findByCategoryId(categoryId,pageable);
     }
 
 
-    public List<Product> findByTitleContaining(String searchTitle) {
-
-        return productRepository.findByTitleContaining(searchTitle);
+    public Page<Product> findByTitleContaining(String searchTitle,int page) {
+    Pageable pageable = PageRequest.of(page,12);
+        return productRepository.findByTitleContaining(searchTitle,pageable);
     }
 }

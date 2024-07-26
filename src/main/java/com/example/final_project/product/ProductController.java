@@ -4,6 +4,7 @@ package com.example.final_project.product;
 import com.example.final_project.category.Category;
 import com.example.final_project.category.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,26 +25,28 @@ public class ProductController {
     //상품 리스트
     @GetMapping("/list")
     public String getProducts(Model model, @RequestParam(defaultValue = "0") Long categoryId,
-                              @RequestParam(defaultValue = "") String searchTitle) {
-
-        List<Product> products = new ArrayList<>();
+                              @RequestParam(defaultValue = "") String searchTitle,
+                              @RequestParam(value="page",defaultValue = "0") int page) {
 
 
         // 카테고리 ID가 0일 경우 모든 상품을 가져옴
         if (categoryId == 0 && searchTitle.length() == 0) {
-            products = productService.getProducts();
+            Page<Product> products = productService.getProducts(page);
+            model.addAttribute("products", products);
         } else if (categoryId != 0) {
             // 카테고리 ID가 0이 아닐 경우 해당 카테고리에 속하는 상품을 가져옴
-            products = productService.findByCategoryId(categoryId);
+            Page<Product> products = productService.findByCategoryId(categoryId,page);
+            model.addAttribute("products", products);
         } else if (categoryId == 0 && searchTitle.length() != 0) {
-            products = productService.findByTitleContaining(searchTitle);
+            Page<Product> products = productService.findByTitleContaining(searchTitle,page);
+            model.addAttribute("products", products);
         }
 
         // 카테고리 목록을 항상 가져옴
         List<Category> categories = categoryService.getCategoryList();
 
         // 모델에 데이터 추가
-        model.addAttribute("products", products);
+
         model.addAttribute("categories", categories);
 
         return "product_list";
