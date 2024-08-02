@@ -3,6 +3,7 @@ package com.example.final_project.product;
 
 import com.example.final_project.category.Category;
 import com.example.final_project.category.CategoryService;
+import com.example.final_project.comment.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import java.util.Optional;
 public class ProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
+    private final CommentService commentService;
 
     //상품 리스트
     @GetMapping("/list")
@@ -72,8 +74,10 @@ public class ProductController {
     public String showProduct(@PathVariable("id") Long id, Model model ) {
         Optional<Product> showProduct = productService.showProduct(id);
         if (showProduct.isPresent()) {
+            Product product = showProduct.get();
             model.addAttribute("showProduct", showProduct.get());
             // Optional 처리 했으면 .get 으로 가져 오기
+            model.addAttribute("comments" ,product.getCommentList());
             return "product_detail";
         } else return "redirect:/product/list";
     }
@@ -113,6 +117,7 @@ public class ProductController {
         productService.updateProduct(id, description, title, price, url);
         return "redirect:/product/list";
     }
+
 
 
 }

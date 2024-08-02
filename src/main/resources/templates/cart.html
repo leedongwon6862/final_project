@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cart</title>
+</head>
+<body>
+<h1>Cart Details</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Product Title</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${cartList}">
+        <td th:text="${item.product.title}"></td>
+        <td th:text="${item.count}"></td>
+        <td th:text="${item.product.price * item.count}"></td>
+        <form th:action="@{|/cart/update/${item.id}|}" method="post">
+            <button type="submit">수량추가하기</button>
+        </form>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

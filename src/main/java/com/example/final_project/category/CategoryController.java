@@ -4,10 +4,7 @@ package com.example.final_project.category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,7 +22,7 @@ public class CategoryController {
 
     //카테고리 추가
     @PostMapping("/add")
-    public String addCategory(String title){
+    public String addCategory(@RequestParam("title") String title){
         categoryService.addCategory(title);
         return "redirect:/product/list";
     }

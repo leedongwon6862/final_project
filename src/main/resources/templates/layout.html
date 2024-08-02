@@ -10,12 +10,20 @@
 
 <body class="bg-gray-100 flex flex-col items-center">
 
+<a href="/product/list">
 <p class="text-2xl font-bold mt-8 mb-8">30cm</p>
-
+</a>
 <div class="w-full flex justify-end p-4">
+    <a href="/cart/">내 장바구니</a>
+    <a href="/category/add">카테고리생성</a>
     <a href="/user/signup" class="text-blue-500 hover:underline">회원가입</a>
     <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
     <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+
+    <span sec:authorize="isAuthenticated()"
+          th:text="${#authentication.name}"
+          class="ml-4"></span>
+
 </div>
 
 

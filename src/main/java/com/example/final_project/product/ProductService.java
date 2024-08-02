@@ -37,9 +37,12 @@ public class ProductService {
         product.setTitle(title);
         product.setPrice(price);
         product.setDescription(description);
+        if(categoryId != null){
         Optional<Category> category = categoryService.getCategoryById(categoryId);
         product.setCategory(category.get());
-
+        }else{
+            product.setCategory(null);
+        }
 
         if (!file.isEmpty())  //내가 파일 업로드 한 경우
             try {

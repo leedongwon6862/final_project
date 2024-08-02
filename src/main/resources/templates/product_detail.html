@@ -11,6 +11,23 @@
     </div>
 
     <a th:href="@{|/product/delete/${id}|}" class="btn">삭제</a>
+    <a th:href="@{|/cart/add/${showProduct.id}|}">장바구니 추가하기</a>
+
+    <form th:action="@{|/comment/create|}" method="post">
+        <input type="text" name="content" placeholder="리뷰 작성해주세요">
+        <input type="hidden" name="parentId" th:value="${showProduct.id}">
+        <input type="submit" value="리뷰 작성" class="btn">
+    </form>
+
+
+    <div th:each="comment : ${comments}">
+        <p th:text="${comment.username}"></p>
+        <p th:text="${comment.content}"></p>
+    </div>
+
+
+
+
 </div>
 
 

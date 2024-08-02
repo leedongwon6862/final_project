@@ -18,15 +18,17 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
-                .formLogin((formLogin) -> formLogin
+                        .requestMatchers("/**").permitAll().anyRequest().authenticated())
+               .formLogin((formLogin) -> formLogin
                         .loginPage("/user/login")
                         .defaultSuccessUrl("/product/list"))
                 .logout((logout) -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
                         .logoutSuccessUrl("/product/list")
                         .invalidateHttpSession(true))
-        ;
+                .csrf(c -> c.ignoringRequestMatchers(
+                        new AntPathRequestMatcher("/**")
+                ));
         return http.build();
     }
 
